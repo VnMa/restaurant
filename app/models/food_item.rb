@@ -9,4 +9,13 @@ class FoodItem < ApplicationRecord
 			"http://loremflickr.com/320/240/#{CGI.escape name}"
 		end
 	end
+
+	def self.search(search,section=1)
+		if search
+			where(['name ILIKE ?', "%#{search}%"])
+			#where("upper(name) ILIKE upper(?) and section_id=?", "%#{search}%", section)
+		else
+			where('1=1')
+		end
+	end		
 end
