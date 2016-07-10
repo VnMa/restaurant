@@ -13,6 +13,8 @@
 # #l.fooditems.create([{name: 'Canh Chua', description: 'Delicious fist soup', price: 30000, image_url: 'http://loremflickr.com/320/240/canh-chua'}])
 # fi = FoodItem.create([{name: 'Canh Chua', description: 'Delicious fist soup', price: 30000, image_url: 'http://loremflickr.com/320/240/canh-chua'}])
 # l.food_items = fi
+Section.delete_all
+sections = Section.create([{id:1, name:'Breakfast'}, {id:2, name:'Lunch'}, {id:3, name:'Dinner'}, {id:4, name:'Drinks'}])
 
 b = Section.find_by(name: 'Breakfast')
 b.food_items = []
@@ -53,3 +55,9 @@ FoodItem.create(name: 'Lipton sua', description: 'Liption with milk', section:d,
 FoodItem.create(name: 'Sua tuoi', description: 'Fresh milk', section:d, price: 15000, image_url: 'http://www.bioacimin.com/wp-content/uploads/2016/04/Bioacimin-03-Apr-Tr%E1%BA%BB-n%C3%AAn-u%E1%BB%91ng-s%E1%BB%AFa-t%C6%B0%C6%A1i-t%E1%BB%AB-khi-n%C3%A0o.jpg')
 FoodItem.create(name: 'Ca phe da', description: 'Coffee with ice', section:d, price: 20000, image_url: 'http://img.v3.news.zdn.vn/w660/Uploaded/ngtmns/2014_11_25/travel_for_children__coffee__1.jpg')
 
+# OrderStatus initialization
+OrderStatus.delete_all
+OrderStatus.create! id: 1, name: "In Progress"
+OrderStatus.create! id: 2, name: "Placed"
+OrderStatus.create! id: 3, name: "Shipped"
+OrderStatus.create! id: 4, name: "Cancelled"

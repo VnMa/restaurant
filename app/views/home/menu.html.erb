@@ -4,6 +4,14 @@
 
 	<div class="col-sm-6">
 		<div> <%= link_to "Menu", menu_path, class: "h1" %> </div>
+		
+
+		<%= form_tag(menu_path, :method => "get", id: "search-form") do |f| %>
+		<%= hidden_field_tag :section,  @curr_section %>
+		<%= select_tag(:sort_id, options_for_select(FoodItem.sort_options), :include_blank => '-Sort by ---') %>
+		<%= submit_tag("Search") %>
+		<% end %>
+
 
 		<div class="nav nav-tabs">
 
@@ -39,6 +47,7 @@
 		<%=	 debug @food_items %>
 		<%= @curr_food_item.inspect %>
 	-->
+	<%= debug session[:order_id] %>
 	<% if @curr_food_item %>
 	<div class="card-photo">
 		<div class="card-img">
@@ -48,11 +57,23 @@
 			<%= @curr_food_item.description %>
 		</div>
 	</div>
+
+	<p class="lead">
+		<%= form_for @order_item, remote: true, :authenticity_token => true do |o| %>			
+		<div class="input-group">
+			<div class="input-group-btn">
+				<%= o.hidden_field :food_item_id, value: @curr_food_item.id %>
+				<%= o.hidden_field :quantity, value: 1 %>
+				<%= o.submit "Add to Cart", class: "btn btn-primary" %>
+			</div>
+		</div>
+		<% end %>
+	</p>
 	<% end %>
 </div>
 </div>
 
 <p class="lead">
-	<%= link_to 'New Food Item', new_food_item_path, class:"btn btn-primary" %>
+	<%= link_to 'New Food Item', nil, class:"btn btn-primary" %>
 </p>
 

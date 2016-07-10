@@ -9,18 +9,17 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-light bg-faded">
-		<%= link_to "Banh canh ghe Ba Sach", root_path, class: "navbar-brand" %>
-		<ul class="nav navbar-nav">			
-			<li class="nav-item ">
-				<a class="nav-link " href="#">Orders</a>
-			</li>
-			<li class="nav-item ">
-				<a class="nav-link" href="#">Items</a>
-			</li>
-		</ul>
-	</nav>
+
 	<div class="container">
+		<div class="row">
+			<div class="col-xs-6">
+			<h1><%= link_to "Ba Sach", root_path %></h1>
+			</div>
+			<div class="col-xs-6 text-right">
+				<h1 class="cart-text"><%= render 'layouts/cart_text' %></h1>
+			</div>
+		</div>
+		<hr>
 		<%= yield %>
 	</div>
 </body>
