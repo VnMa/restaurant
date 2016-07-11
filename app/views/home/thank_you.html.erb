@@ -1,0 +1,46 @@
+<div class="well">
+	<div class="row">
+		
+		<div class="col-xs-8">
+			<div>
+				<h3>
+					Thank you for ordering our foods. Have a nice day :)
+				</h3>
+			</div>
+			<table class="table table-striped table-bordered" >
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Quantity</th>
+						<th>Price</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @order.order_items.each do |i| %>            
+
+					<tr>  
+						<td><%= i.food_item.name %></td>
+						<td><%= i.quantity %></td> <!-- Make it an input !! -->
+						<td><%= toCurrency(i.unit_price) %></td>
+						<td><%= toCurrency(i.total_price) %></td>
+					</tr>
+					<% end %>
+					<tr>  
+						<td></td>
+						<td></td> 
+						<td></td>
+						<td>  <%= toCurrency @order.subtotal %></td>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="col-xs-4">
+		<!-- Customer info-->
+
+		<%= render 'customer/customer', customer: @order.curr_customer%>
+
+	</div>
+
+</div>

@@ -25,7 +25,7 @@
 
 		<% @food_items.each do |f| %>
 		<div class="list-group">
-			<%= link_to menu_path(section: @curr_section, food_item: f), :class => "list-group-item" do %>
+			<%= link_to menu_path(section: @curr_section, food_item: f), :class => "list-group-item #{'active' if f.id == @curr_food_item.id}" do %>
 			<span class="label label-primary label-pill pull-xs-right">
 				<%= toCurrency(f.price)%>
 			</span>
@@ -47,7 +47,6 @@
 		<%=	 debug @food_items %>
 		<%= @curr_food_item.inspect %>
 	-->
-	<%= debug session[:order_id] %>
 	<% if @curr_food_item %>
 	<div class="card-photo">
 		<div class="card-img">
@@ -59,7 +58,7 @@
 	</div>
 
 	<p class="lead">
-		<%= form_for @order_item, remote: true, :authenticity_token => true do |o| %>			
+	<%= form_for [@order, @order_item], remote: true, :authenticity_token => true do |o| %>			
 		<div class="input-group">
 			<div class="input-group-btn">
 				<%= o.hidden_field :food_item_id, value: @curr_food_item.id %>

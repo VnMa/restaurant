@@ -5,7 +5,8 @@ class HomeController < ApplicationController
 	def menu
 
 		# Add new order item to cart if possible
-		@order_item = current_order.order_items.new
+		@order = current_order
+		@order_item = @order.order_items.new
 		
 		@sections = Section.all
 		if params[:section]
@@ -43,6 +44,10 @@ class HomeController < ApplicationController
 	end
 
 	def contact_us
+	end
+
+	def thank_you
+		@order = current_order
 	end
 
 	private 

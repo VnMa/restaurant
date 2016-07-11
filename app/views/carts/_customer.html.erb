@@ -1,0 +1,50 @@
+<% debug customer %>
+<%= form_for [order, order.curr_customer], method: :post do |customer| %>
+<% if @customer.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@customer.errors.count, "error") %> prohibited this food item from being saved:</h2>
+
+	<ul>
+		<% @customer.errors.full_messages.each do |message| %>
+		<li><%= message %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+
+<div>
+	<ul class="list-group list-group-flush">
+
+		<li class="list-group-item">
+
+			<div class="field">
+				<%= customer.label :name %><br>
+				<%= customer.text_field :name %>
+			</div>
+		</li>
+		<li class="list-group-item">
+
+			<div class="field">
+				<%= label_tag :address %><br>
+				<%= text_area_tag :address %>
+			</div>
+		</li>
+		<li class="list-group-item">
+
+			<div class="field">
+				<%= label_tag :phone_number %><br>
+				<%= text_field_tag :phone_number %>
+			</div>
+		</li>
+
+		<li class="list-group-item">
+
+			<div class="field">
+				<%= label_tag :email %><br>
+				<%= text_field_tag :email %>
+			</div>
+		</li>
+	</ul>
+</div>
+<% end %>

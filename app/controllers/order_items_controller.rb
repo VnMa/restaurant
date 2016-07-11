@@ -2,9 +2,11 @@ class OrderItemsController < ApplicationController
 	def create
 		@order = current_order
 		@order_item = @order.order_items.new(order_item_params)
-		# @order.save
-		# session[:order_id] = @order.id	
-
+		# @order_item = @order.order_items.find_by(food_item_id: params[:food_item_id])
+		# byebug
+		# if !@order.order_items.find(order_item_params)
+		# 	@order_item = @order.order_items.new(order_item_params)
+		# end
 		
 		respond_to do |format| 
 			if @order.save 
