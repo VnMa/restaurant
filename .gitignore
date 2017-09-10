@@ -6,6 +6,8 @@
 
 # Ignore bundler config.
 /.bundle
+!config/database.yml
+!Gemfile.lock
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -15,5 +17,3 @@
 
 # Ignore Byebug command history file.
 .byebug_history
-config/database.yml
-Gemfile.lock
