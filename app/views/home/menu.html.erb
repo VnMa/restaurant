@@ -2,6 +2,7 @@
 
 <div class="container">
 
+  <div class="row" style="padding-bottom: 10px; padding-left: 10px;">
 	<div class="col-sm-6">
 		<div> <%= link_to "Menu", menu_path, class: "h1" %> </div>
 		
@@ -15,64 +16,39 @@
 
     <br/>
 		<div>
+			<% @sections.each do |s| %>
+			<div class="nav-item " >
+				<%= link_to s.name, menu_path(section: s.id), class: "nav-link  #{current_menu?(s.id)} ", remote: true %>
 
-      <% @sections.each do |s| %>
-          <%= link_to s.name, menu_path(section: s.id),  :class => "btn btn-secondary #{current_menu?(s.id)} " %>
-          <% end %>
-		</div>
-
-    <br/>
-		<% @food_items.each do |f| %>
-		<div class="list-group">
-			<%= link_to menu_path(section: @curr_section, food_item: f), :class => "list-group-item #{'active' if f.id == @curr_food_item.id}" do %>
-			<span class="label label-primary label-pill pull-xs-right">
-				<%= toCurrency(f.price)%>
-			</span>
-			<%= f.name %>			
+			</div>
 			<% end %>
-
-
 		</div>
-		<% end %>
+
+    <div data-id="food_items">
+      <%= render 'food_items/list', locals: {food_items: @food_items, curr_section: @curr_section, curr_food_item: @curr_food_item} %>
+    </div>
+
 	</div>
 	<div class="col-sm-6">		
-		<fieldset class="form-group form-inline pull-xs-right">
+		<div class="row">
+    <fieldset class="form-group form-inline pull-xs-right">
 			<%= form_tag(menu_path, :method => "get", id: "search-form") do %>
 			<%= text_field_tag :search, params[:search], placeholder: "Search food items" %>
 			<%= submit_tag "Search", :name => nil %>
 			<% end %>
 		</fieldset>
-		<!-- Food image 
-		<%=	 debug @food_items %>
-		<%= @curr_food_item.inspect %>
-	-->
-	<% if @curr_food_item %>
-	<div class="card">
-		<div class="card-img">
-			<img src="<%=  @curr_food_item.get_image_url%>" class="img-fluid" alt="Responsive image">
-		</div>
-		<div class="card-block">
-			<%= @curr_food_item.description %>
-		</div>
-	</div>
+    </div>
 
-	<p class="lead">
-	
-	<%= form_for [@order, @order_item], remote: true, :authenticity_token => true do |o| %>			
-		<div class="input-group">
-			<div class="input-group-btn">
-				<%= o.hidden_field :food_item_id, value: @curr_food_item.id %>
-				<%= o.hidden_field :quantity, value: 1 %>
-				<%= o.submit "Add to Cart", class: "btn btn-primary" %>
-			</div>
-		</div>
-		<% end %>
-	</p>
-	<% end %>
-</div>
-</div>
+    <div class="row" data-id="food_detail">
+      <%= render "food_items/detail", locals: { curr_food_item: @curr_food_item, order: @order, order_item: @order_item } %>
+    </div>
+  </div>
+  </div>
 
-<p class="lead">
-	<%= link_to 'New Food Item', nil, class:"btn btn-primary" %>
-</p>
+  <div class="row" style="padding-left: 25px">
+    <p class="lead">
+      <%= link_to 'New Food Item', nil, class:"btn btn-primary" %>
+    </p>
+  </div>
+</div>
 

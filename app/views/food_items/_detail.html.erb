@@ -1,0 +1,27 @@
+<% if @curr_food_item %>
+    <div class="card text-right">
+    <div class="card-photo">
+      <div class="card-img">
+        <img src="<%=  @curr_food_item.get_image_url%>" class="img-fluid" alt="Responsive image">
+      </div>
+      <div class="card-block">
+        <%= @curr_food_item.description %>
+      </div>
+    </div>
+    </div>
+
+    <div class="container text-right">
+      <p class="lead ">
+
+        <%= form_for [@order, @order_item], remote: true, :authenticity_token => true do |o| %>
+          <div class="input-group">
+            <div class="input-group-btn">
+              <%= o.hidden_field :food_item_id, value: @curr_food_item.id %>
+              <%= o.hidden_field :quantity, value: 1 %>
+              <%= o.submit "Add to Cart", class: "btn btn-primary d-inline" %>
+            </div>
+          </div>
+      <% end %>
+      </p>
+    </div>
+<% end %>
