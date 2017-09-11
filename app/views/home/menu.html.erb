@@ -15,14 +15,14 @@
 
 
     <br/>
-		<div>
+		<ul class="nav nav-tabs">
 			<% @sections.each do |s| %>
-			<div class="nav-item " >
-				<%= link_to s.name, menu_path(section: s.id), class: "nav-link  #{current_menu?(s.id)} ", remote: true %>
+			<li class="nav-item " >
+				<%= link_to s.name, menu_path(section: s.id), class: "nav-link active #{current_menu?(s.id)} ", remote: true %>
 
-			</div>
+			</li>
 			<% end %>
-		</div>
+		</ul>
 
     <div data-id="food_items">
       <%= render 'food_items/list', locals: {food_items: @food_items, curr_section: @curr_section, curr_food_item: @curr_food_item} %>

@@ -1,16 +1,4 @@
-<% debug customer %>
-<%= form_for [order, order.curr_customer], method: :post do |customer| %>
-<% if @customer.errors.any? %>
-<div id="error_explanation">
-	<h2><%= pluralize(@customer.errors.count, "error") %> prohibited this food item from being saved:</h2>
-
-	<ul>
-		<% @customer.errors.full_messages.each do |message| %>
-		<li><%= message %></li>
-		<% end %>
-	</ul>
-</div>
-<% end %>
+<%= form_for [@order, @order.curr_customer], method: :post do |customer| %>
 
 
 <div>

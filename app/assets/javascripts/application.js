@@ -3,3 +3,5 @@
 //= require tether
 ////= require bootstrap-sprockets
 //= require bootstrap
+
+//= require carts
