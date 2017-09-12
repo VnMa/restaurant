@@ -17,9 +17,9 @@
 
           <tr>  
             <td><%= i.food_item.name %></td>
-            <td><%= number_field(i, :quantity, in: 1..20, step: 1, class: 'cart_quantity', value: i.quantity) %> </td>
-            <td><%= toCurrency(i.unit_price) %></td>
-            <td><%= toCurrency(i.total_price) %></td>,
+            <td data-id="<%= i.food_item.id %>"><%= number_field(i, :quantity, in: 1..20, step: 1, class: 'cart_quantity', value: i.quantity) %> </td>
+            <td data-name="price_<%= i.food_item.id %>" data-value="<%= i.unit_price %>"><%= toCurrency(i.unit_price) %></td>
+            <td data-name="total_<%= i.food_item.id %>"><%= toCurrency(i.unit_price * i.quantity) %></td>,
             <td><%= link_to 'X', order_order_item_path(order, i),
               method: :delete,
               data: { confirm: 'Are you sure?' },
@@ -48,8 +48,43 @@
     <div class="col-xs-4">
       <!-- Customer info-->
 
-      <%= render 'carts/customer', order: order, customer: order.curr_customer%>
+      <%= f.fields_for :customer do |customer| %>
 
+          <div>
+            <ul class="list-group list-group-flush">
+
+              <li class="list-group-item">
+
+                <div class="field">
+                  <%= customer.label :name %><br>
+                  <%= customer.text_field :name %>
+                </div>
+              </li>
+              <li class="list-group-item">
+
+                <div class="field">
+                  <%= customer.label :address %><br>
+                  <%= customer.text_field :address %>
+                </div>
+              </li>
+              <li class="list-group-item">
+
+                <div class="field">
+                  <%= label_tag :phone_number %><br>
+                  <%= customer.text_field :phone_number %>
+                </div>
+              </li>
+
+              <li class="list-group-item">
+
+                <div class="field">
+                  <%= label_tag :email %><br>
+                  <%= customer.text_field :email %>
+                </div>
+              </li>
+            </ul>
+          </div>
+      <% end %>
     </div>
 
   </div>

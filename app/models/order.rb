@@ -1,22 +1,25 @@
 class Order < ApplicationRecord
 	belongs_to :order_status, optional: true
 	has_many :order_items
-	has_one :customer, inverse_of: :order, dependent: :destroy
+	has_one :customer, dependent: :destroy
 	# validates_presence_of :customer
 
+	accepts_nested_attributes_for :customer
+
 	before_create :set_order_status
-	before_save :save_customer, :update_subtotal
+	before_save :update_subtotal
 
 	def subtotal
 		order_items.collect { |oi| oi.valid? ? (oi.quantity * oi.unit_price) : 0 }.sum
 	end
 
 	def curr_customer
-		if customer
-			return customer
-		else
-			return Customer.new
-		end
+		# if self.customer
+		# 	return self.customer
+		# else
+		# 	return Customer.new
+		# end
+		self.customer
 	end
 
 	private
@@ -29,6 +32,6 @@ class Order < ApplicationRecord
 	end
 
 	def save_customer
-		build_customer unless customer
+		build_customer if self.customer.nil?
 	end
 end

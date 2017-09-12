@@ -1,5 +1,7 @@
 <% if @order.errors.any? || @order_item.errors.any? %>
-alert("not valid.")
+  alert('not valid')
+  console.error("not valid." + @order_item.errors)
+
 <% else %>
   $(".cart-text").html("<%= escape_javascript(render 'layouts/cart_text') %>")
   console.log("Calling AJAX sucessfully. Yay!!!")

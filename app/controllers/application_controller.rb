@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 		if !session[:order_id].nil?
 			Order.find(session[:order_id])
 		else
-			Order.create({subtotal: 0})
+			o = Order.create({subtotal: 0})
 		end
 	end
 end

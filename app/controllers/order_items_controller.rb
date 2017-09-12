@@ -7,13 +7,16 @@ class OrderItemsController < ApplicationController
 		# if !@order.order_items.find(order_item_params)
 		# 	@order_item = @order.order_items.new(order_item_params)
 		# end
-		
+
+		@order.build_customer
+
 		respond_to do |format| 
-			if @order.save 
+			if @order_item.save
 				format.html { redirect_to menu_path }				
 				format.js
 				session[:order_id] = @order.id
-			else  
+			else
+				p @order_item.errors
 				format.html { render :action => "new" }  
 				format.js
 			end  
