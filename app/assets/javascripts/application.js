@@ -1,7 +1,5 @@
-//= require jquery
-//= require jquery_ujs
-//= require tether
-////= require bootstrap-sprockets
-//= require bootstrap
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
 
 //= require carts
