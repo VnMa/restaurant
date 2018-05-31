@@ -1,0 +1,53 @@
+<%= render 'shared/error', locals: {items: [@order, @order_item, @customer]} %>
+
+<div class="container">
+
+  <div class="row" style="padding-bottom: 10px; padding-left: 10px;">
+    <div class="col-sm-6">
+      <div> <%= link_to "Menu", menu_path, class: "menu-title" %> </div>
+
+
+      <%= form_tag(menu_path, :method => "get", id: "search-form") do |f| %>
+          <%= hidden_field_tag :section,  @curr_section %>
+          <%= select_tag(:sort_id, options_for_select(FoodItem.sort_options), :include_blank => '-Sort by ---') %>
+          <%= submit_tag "Search", class: 'btn btn-secondary' %>
+      <% end %>
+
+      <br/>
+      <ul class="nav nav-pills category-list">
+        <% @sections.each do |s| %>
+            <li class="nav-item " >
+              <%= link_to s.name, menu_path(section: s.id), class: "nav-link #{current_menu?(s.id)} #{@curr_section == s.id ? 'active' : ''}  " %>
+
+            </li>
+        <% end %>
+      </ul>
+
+      <div data-id="food_items">
+        <%= render 'food_items/list', locals: {food_items: @food_items, curr_section: @curr_section, curr_food_item: @curr_food_item} %>
+      </div>
+
+    </div>
+    <div class="col-sm-6">
+      <div class="row">
+        <fieldset class="form-group form-inline pull-xs-right">
+          <%= form_tag(menu_path, :method => "get", id: "search-form") do %>
+              <%= text_field_tag :search, params[:search], placeholder: "Search food items", class: 'search-input' %>
+              <%= submit_tag "Search", :name => nil, :class => 'btn secondary' %>
+          <% end %>
+        </fieldset>
+      </div>
+
+      <div class="row" data-id="food_detail">
+        <%= render "food_items/detail", locals: { curr_food_item: @curr_food_item, order: @order, order_item: @order_item } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding-left: 25px">
+    <p class="lead">
+      <%= link_to 'New Food Item', nil, class:"btn btn-primary" %>
+    </p>
+  </div>
+</div>
+

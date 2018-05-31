@@ -1,6 +1,6 @@
 <% @food_items.each do |f| %>
     <div class="list-group">
-      <%= link_to menu_path(section: @curr_section, food_item: f), :class => "list-group-item #{'active' if f.id == @curr_food_item.id}", :remote => true do %>
+      <%= link_to menu_path(section: @curr_section, food_item: f), :class => "list-group-item #{'active' if f.id == @curr_food_item.id}" do %>
 			<span class="label label-primary label-pill pull-xs-right">
 				<%= toCurrency(f.price)%>
 			</span>

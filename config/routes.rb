@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 		resources :order_items, only: [:create, :update, :destroy]
 		resources :customers, only: [:create, :update]
 	end
-	get 'menu' => 'home#menu'
+	get 'menu' => 'menu#index'
 	get 'contact_us' => 'home#contact_us'
 	get 'thank_you' => 'home#thank_you'
 	
