@@ -42,6 +42,7 @@ class OrderItemsController < ApplicationController
 	end
 
 	def destroy
+		p "inside #{__method__}: #{params}"
 		@order = current_order
 		@order_item = @order.order_items.find(params[:id])
 

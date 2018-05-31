@@ -13,17 +13,16 @@
           </tr>
         </thead>
         <tbody>
-          <% order.order_items.each do |i| %>            
+          <% order.order_items.each do |i| %>
 
-          <tr>  
+          <tr>
             <td><%= i.food_item.name %></td>
-            <td data-id="<%= i.food_item.id %>"><%= number_field(i, :quantity, in: 1..20, step: 1, class: 'cart_quantity', value: i.quantity) %> </td>
-            <td data-name="price_<%= i.food_item.id %>" data-value="<%= i.unit_price %>"><%= toCurrency(i.unit_price) %></td>
+            <td><%= number_field(i, :quantity, in: 1..20, step: 1, class: 'cart_quantity ', value: i.quantity, 'data-id': i.food_item.id ) %> </td>
+            <td class="price_<%= i.food_item.id %>" data-value="<%= i.unit_price %>"><%= toCurrency(i.unit_price) %></td>
             <td data-name="total_<%= i.food_item.id %>"><%= toCurrency(i.unit_price * i.quantity) %></td>,
-            <td><%= link_to 'X', order_order_item_path(order, i),
+            <td><%= link_to('X', order_item_path(i),
               method: :delete,
-              data: { confirm: 'Are you sure?' },
-              remote: true %>
+              data: { confirm: 'Are you sure?' } )%>
             </td>
           </tr>
           <% end %>
@@ -36,7 +35,7 @@
           </tr>
           <tr>
             <td></td>
-            <td></td> 
+            <td></td>
             <td></td>
             <td>  <%= toCurrency(current_order.subtotal) %></td>
             <td><%= f.submit 'Check out', class: 'btn btn-primary' %>
