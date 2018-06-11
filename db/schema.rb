@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711031410) do
+ActiveRecord::Schema.define(version: 20180604101027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "coupons", force: :cascade do |t|
+    t.string   "value"
+    t.string   "status"
+    t.integer  "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_coupons_on_order_id", using: :btree
+  end
 
   create_table "customers", force: :cascade do |t|
     t.string   "name"
@@ -72,6 +81,7 @@ ActiveRecord::Schema.define(version: 20160711031410) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "coupons", "orders"
   add_foreign_key "customers", "orders"
   add_foreign_key "order_items", "food_items"
   add_foreign_key "order_items", "orders"

@@ -1,12 +1,16 @@
 class OrderItemsController < ApplicationController
 	def create
 		@order = current_order
-		@order_item = @order.order_items.new(order_item_params)
-		# @order_item = @order.order_items.find_by(food_item_id: params[:food_item_id])
-		# byebug
-		# if !@order.order_items.find(order_item_params)
-		# 	@order_item = @order.order_items.new(order_item_params)
-		# end
+    # @order_item = @order.order_items.new(order_item_params)
+		@order_item = @order.order_items.find_by(food_item_id: order_item_params[:food_item_id])
+		byebug
+		if @order_item.nil?
+			@order_item = @order.order_items.new(order_item_params)
+
+			raise 'Order item should not be null' if @order_item.nil?
+		else
+			@order_item.quantity += 1
+		end
 
 		@order.build_customer
 
@@ -42,7 +46,6 @@ class OrderItemsController < ApplicationController
 	end
 
 	def destroy
-		p "inside #{__method__}: #{params}"
 		@order = current_order
 		@order_item = @order.order_items.find(params[:id])
 

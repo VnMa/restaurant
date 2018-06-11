@@ -10,7 +10,9 @@
       <%= form_tag(menu_path, :method => "get", id: "search-form") do |f| %>
           <%= hidden_field_tag :section,  @curr_section %>
           <%= select_tag(:sort_id, options_for_select(FoodItem.sort_options), :include_blank => '-Sort by ---') %>
-          <%= submit_tag "Search", class: 'btn btn-secondary' %>
+          <%= button_tag :submit, :class => 'btn' do %>
+              <i class="fa fa-search"></i>
+          <% end %>
       <% end %>
 
       <br/>
@@ -30,12 +32,14 @@
     </div>
     <div class="col-sm-6">
       <div class="row">
-        <fieldset class="form-group form-inline pull-xs-right">
+        <div class="form-group form-inline pull-xs-right sb">
           <%= form_tag(menu_path, :method => "get", id: "search-form") do %>
-              <%= text_field_tag :search, params[:search], placeholder: "Search food items", class: 'search-input' %>
-              <%= submit_tag "Search", :name => nil, :class => 'btn secondary' %>
+              <%= text_field_tag :search, params[:search], placeholder: "Search food items", class: 'search-input sb__input' %>
+              <%= button_tag :submit, :class => 'btn' do %>
+                  <i class="fa fa-search"></i>
+              <% end %>
           <% end %>
-        </fieldset>
+        </div>
       </div>
 
       <div class="row" data-id="food_detail">

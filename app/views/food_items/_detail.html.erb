@@ -18,7 +18,10 @@
             <div class="input-group-btn">
               <%= o.hidden_field :food_item_id, value: @curr_food_item.id %>
               <%= o.hidden_field :quantity, value: 1 %>
-              <%= o.submit "Add to Cart" %>
+              <!--<%= o.submit "Add to Cart", :class => 'add-to-cart' %>-->
+              <%= button_tag :submit, :class => 'add-to-cart' do %>
+                  Add to cart
+              <% end %>
             </div>
           </div>
       <% end %>

@@ -1,4 +1,5 @@
 <div class="">
+  <%= order.inspect %>
   <%= form_for order, method: :patch do |f| %>
   <div class="row">
     <div class="col-xs-8">
@@ -20,18 +21,23 @@
             <td><%= number_field(i, :quantity, in: 1..20, step: 1, class: 'cart_quantity ', value: i.quantity, 'data-id': i.food_item.id ) %> </td>
             <td class="price_<%= i.food_item.id %>" data-value="<%= i.unit_price %>"><%= toCurrency(i.unit_price) %></td>
             <td data-name="total_<%= i.food_item.id %>"><%= toCurrency(i.unit_price * i.quantity) %></td>,
-            <td><%= link_to('X', order_item_path(i),
+            <td><%= link_to 'X', order_order_item_path(order, i),
               method: :delete,
-              data: { confirm: 'Are you sure?' } )%>
+              data: { confirm: 'Are you sure?' } %>
             </td>
           </tr>
           <% end %>
           <tr>
             <td></td>
-            <td></td>
-            <td></td>
             <td> <i>Coupon</i> </td>
-            <td><b>XYZ</b></td>
+            <td>
+              <%= f.fields_for :coupon do |coupon_form| %>
+                  <%= coupon_form.text_field :value, placeholder: "Enter your coupon", class: 'coupon__input' %>
+              <% end %>
+            </td>
+
+            <td><a href="#" class="btn btn-primary" id="check-coupon">Verify</a></td>
+            <td><span id="verify-result">?</span></td>
           </tr>
           <tr>
             <td></td>

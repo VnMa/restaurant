@@ -38,8 +38,26 @@ option:hover {
 .search {
 }
 
+.sb {
+  position: relative;
+}
+
+.sb__input+.btn {
+  top: 0;
+  right: 0;
+  height: 100%;
+  position: absolute;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
 .search-input {
-  padding-left: 25px;
+  outline: none;
+  line-height: 1;
+  min-width: 28rem;
+  padding: .65rem calc(45px + 1.5rem) .65rem 1.5rem;
+  border-radius: 3px;
+  border: 2px solid #d6d6d7;
 }
 
 

@@ -26,6 +26,11 @@
 						<td><%= toCurrency(i.total_price) %></td>
 					</tr>
 					<% end %>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><span>Coupon</span></td>
+            <td class="<%= @order.coupon.status %>"> <span ><%= @order.coupon.value %></span></td>
 					<tr>  
 						<td></td>
 						<td></td> 
