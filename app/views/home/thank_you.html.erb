@@ -30,7 +30,12 @@
             <td></td>
             <td></td>
             <td><span>Coupon</span></td>
+            <% unless @order.coupon.nil? %>
             <td class="<%= @order.coupon.status %>"> <span ><%= @order.coupon.value %></span></td>
+            <% else %>
+            <td></td>
+            <% end %>
+
 					<tr>  
 						<td></td>
 						<td></td> 
@@ -44,8 +49,8 @@
 	<div class="col-xs-4">
 		<!-- Customer info-->
 
-		<%= render 'customer/customer', customer: @order.customer%>
+		<%= render 'customer/customer', customer: @order.customer %>
 
 	</div>
-
+  </div>
 </div>

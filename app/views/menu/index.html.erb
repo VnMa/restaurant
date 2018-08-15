@@ -2,46 +2,51 @@
 
 <div class="container">
 
-  <div class="row" style="padding-bottom: 10px; padding-left: 10px;">
+  <div class="row">
+
     <div class="col-sm-6">
-      <div> <%= link_to "Menu", menu_path, class: "menu-title" %> </div>
-
-
-      <%= form_tag(menu_path, :method => "get", id: "search-form") do |f| %>
+      <%= form_tag(menu_path, :method => "get") do |f| %>
           <%= hidden_field_tag :section,  @curr_section %>
-          <%= select_tag(:sort_id, options_for_select(FoodItem.sort_options), :include_blank => '-Sort by ---') %>
+          <%= select_tag(:sort_id, options_for_select(FoodItem.sort_options), :class => 'sort__input', :include_blank => '-Sort by ---') %>
           <%= button_tag :submit, :class => 'btn' do %>
               <i class="fa fa-search"></i>
           <% end %>
       <% end %>
-
-      <br/>
-      <ul class="nav nav-pills category-list">
-        <% @sections.each do |s| %>
-            <li class="nav-item " >
-              <%= link_to s.name, menu_path(section: s.id), class: "nav-link #{current_menu?(s.id)} #{@curr_section == s.id ? 'active' : ''}  " %>
-
-            </li>
+    </div>
+    <div class="col-sm-6 ">
+      <div class="form-group form-inline pull-xs-right sb">
+        <%= form_tag(menu_path, :method => "get" ) do %>
+            <%= button_tag :submit, :class => 'btn pull-right' do %>
+                <i class="fa fa-search"></i>
+            <% end %>
+            <%= text_field_tag :search, params[:search], placeholder: "Search food items", class: 'search-input sb__input pull-right' %>
         <% end %>
-      </ul>
+      </div>
 
+    </div>
+
+
+  </div>
+  <div class="row  category-list">
+
+    <ul class="nav nav-pills">
+      <% @sections.each do |s| %>
+          <li class="nav-item " >
+            <%= link_to s.name, menu_path(section: s.id), class: "nav-link #{current_menu?(s.id)} #{@curr_section == s.id ? 'active' : ''}  " %>
+
+          </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="row" style="padding-bottom: 10px; padding-left: 10px;">
+    <div class="col-sm-6">
       <div data-id="food_items">
         <%= render 'food_items/list', locals: {food_items: @food_items, curr_section: @curr_section, curr_food_item: @curr_food_item} %>
       </div>
 
     </div>
     <div class="col-sm-6">
-      <div class="row">
-        <div class="form-group form-inline pull-xs-right sb">
-          <%= form_tag(menu_path, :method => "get", id: "search-form") do %>
-              <%= text_field_tag :search, params[:search], placeholder: "Search food items", class: 'search-input sb__input' %>
-              <%= button_tag :submit, :class => 'btn' do %>
-                  <i class="fa fa-search"></i>
-              <% end %>
-          <% end %>
-        </div>
-      </div>
-
       <div class="row" data-id="food_detail">
         <%= render "food_items/detail", locals: { curr_food_item: @curr_food_item, order: @order, order_item: @order_item } %>
       </div>

@@ -6,11 +6,37 @@
 .add-to-cart {
   border-radius: 5px;
   border: 2px solid #d6d6d7;
-  padding: 5px;
+  padding: 7px;
   margin: 5px 0;
 }
 
 .add-to-cart:hover {
   background: deepskyblue;
   color: white;
+}
+
+.card-block {
+  padding: 5px;
+}
+
+.food-description {
+  padding: 5px;
+  border-bottom: 1px solid #eee;
+}
+
+.rating {
+  position: relative;
+  padding-top: 5px;
+  .stars {
+    display: inline-block;
+    span {
+      display: inline-block;
+      background-color: red;
+      border: 1px solid #eee;
+      width: 16px;
+      height: 14px;
+      cursor: pointer;
+      margin-left: 2px;
+    }
+  }
 }

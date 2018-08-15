@@ -5,6 +5,9 @@ class HomeController < ApplicationController
 
 
 	def contact_us
+	# # 	Sending email for testing
+	# 	UserMailer.welcome_email.deliver_now
+		Rails.logger.debug "inside #{__method__}"
 	end
 
 	def thank_you

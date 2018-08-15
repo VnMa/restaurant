@@ -3,7 +3,6 @@ class OrderItemsController < ApplicationController
 		@order = current_order
     # @order_item = @order.order_items.new(order_item_params)
 		@order_item = @order.order_items.find_by(food_item_id: order_item_params[:food_item_id])
-		byebug
 		if @order_item.nil?
 			@order_item = @order.order_items.new(order_item_params)
 

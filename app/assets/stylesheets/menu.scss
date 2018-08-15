@@ -1,3 +1,5 @@
+$SORT_HEIGHT: 42px;
+
 .img {
   width: 100%;
   height:auto;
@@ -17,16 +19,24 @@
 }
 
 select {
-  background-color: deepskyblue;
-  color: white;
+  //background-color: deepskyblue;
+  //color: white;
   font-weight:100;
   min-height: 100%;
-  border: 1px
+  width: 75%;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: 1px;
+  border-radius: 3px;
 }
 
 select option {
   padding: 5px;
   margin: 5px;
+}
+
+.sort__input, .btn {
+  height: $SORT_HEIGHT;
 }
 
 option:hover {
@@ -42,6 +52,10 @@ option:hover {
   position: relative;
 }
 
+.sb__input {
+  padding: 0 5px;
+}
+
 .sb__input+.btn {
   top: 0;
   right: 0;
@@ -51,11 +65,17 @@ option:hover {
   border-bottom-left-radius: 0;
 }
 
+.pull-right {
+  float: right;
+}
+
 .search-input {
   outline: none;
   line-height: 1;
-  min-width: 28rem;
-  padding: .65rem calc(45px + 1.5rem) .65rem 1.5rem;
+  height: $SORT_HEIGHT;
+  min-width: 75%;
+  //padding: .65rem calc(45px + 1.5rem) .65rem 1.5rem;
+  padding: 0 5px;
   border-radius: 3px;
   border: 2px solid #d6d6d7;
 }
@@ -63,6 +83,7 @@ option:hover {
 
 .category-list {
   margin-bottom: 15px;
+  border-bottom: 1px solid #2E2F30;
 }
 
 .list-group {
@@ -76,3 +97,4 @@ option:hover {
 .badge-pill {
   background: deepskyblue;
 }
+

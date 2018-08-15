@@ -34,6 +34,7 @@ gem 'rails-i18n', '~> 5.0.0' # For 5.0.x
 gem 'fontawesome-rails', '~> 4.0', '>= 4.0.3.2'
 
 gem 'activemerchant', '~> 1.79', '>= 1.79.2'
+gem 'figaro'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
